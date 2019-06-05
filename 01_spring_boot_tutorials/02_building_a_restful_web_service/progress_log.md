@@ -13,32 +13,32 @@ Add `Application` class for simple use of application configuration by the sprin
 Run `mvn spring-boot:run` to build and run the application, but get an error because the target release `1.12` is not valid. Have to find out how to specify how to build with java 12.
 
 ```xml
-    <...>
-    <properties>
-        <java.version>1.12</java.version>
-    </properties>
-    <..>
+<...>
+<properties>
+    <java.version>1.12</java.version>
+</properties>
+<..>
 ```
 
 Turns out it's quite easy. Java 12 should be configured as `12`, not `1.12`. 
 
 ```xml
-    <...>
-    <properties>
-        <java.version>12</java.version>
-    </properties>
-    <..>
+<...>
+<properties>
+    <java.version>12</java.version>
+</properties>
+<..>
 ```
 
 However, another error get's thrown. It seems like specifying both the `@RequestMapping` for the actual path and the http-method needs to be done differently than my current way. Let's dive into the spring framework documentation.
 
 ```java
-    @RequestMapping("/greeting")
-    @RequestMapping(method=GET)
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
+@RequestMapping("/greeting")
+@RequestMapping(method=GET)
+public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    return new Greeting(counter.incrementAndGet(),
+                        String.format(template, name));
+}
 ```
 
 Okay, so the more elegant way to handle this is using a `@GetMapper` at the method level and putting the path mapping with `@RequestMapping("/greeting")` at the class level. However, this introduced new problems.
