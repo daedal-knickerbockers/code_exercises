@@ -4,7 +4,7 @@
 
 ## Steps taken
 
-Changed JAVA_HOME and PATH variable to reflect newly installed Java 12 version.
+Change JAVA_HOME and PATH variable to reflect newly installed Java 12 version.
 
 ```
 java -version
@@ -13,7 +13,7 @@ Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
 Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 ```
 
-Installed maven and added it to the PATH variable.
+Installe maven and add it to the PATH variable.
 
 ```
 mvn -v
@@ -24,14 +24,14 @@ Default locale: de_DE, platform encoding: Cp1252
 OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 ```
 
-Created package `hello` and simple classes `HelloWorld` and `Greeter`.
+Create package `hello` and simple classes `HelloWorld` and `Greeter`.
 
 Setting up a basic build script. Compiling it with `mvn compile` and packaging it with `mvn package`.
 
-Added dependency `org.joda.time.LocalTime` to class `HelloWorld`. Now running `mvn compile` fails because of missing dependencies in the build script.
+Add dependency `org.joda.time.LocalTime` to class `HelloWorld`. Now running `mvn compile` fails because of missing dependencies in the build script.
 
-Added `dependencies` node to build script and ran `mvn compile` and `mvn package` again. Missing dependencies get resolved and .jar file created again.
+Add `dependencies` node to build script and ran `mvn compile` and `mvn package` again. Missing dependencies get resolved and .jar file gets created again.
 
-Added dependency `junit` to the build script and created test class for `Greeter`. Ran `mvn test` and got confirmation that the test has run successfully.
+Add dependency `junit` to the build script and creat test class for `Greeter`. Running `mvn test` confirmas that the test has run successfully.
 
 **End of Tutorial**
