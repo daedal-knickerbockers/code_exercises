@@ -1,4 +1,4 @@
-# BEAT THE BUG
+# WIP: BEAT THE BUG
 A fun little coding exercise that should become a small and enjoyable little game.
 
 ## What is the game?
@@ -48,4 +48,4 @@ By looking at the different screens of the mockup we can deduce our first batch 
 #### The Game
 A `Game` object will represent one instance of the actual Beat the Bug game. A `Game` therefore needs to be identifiable by a unique id to be separable from other `Game` instances. Furthermore, a `Game`can either be running or finished.
 
-![The Game Class](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.https://github.com/daedal-knickerbockers/code_exercises/resources/diagrams/Game.puml)
+![The Game Class](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://https://raw.githubusercontent.com/daedal-knickerbockers/code_exercises/master/resources/diagrams/Game.puml)
