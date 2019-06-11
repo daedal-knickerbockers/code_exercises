@@ -1,0 +1,6 @@
+@startuml
+Class Game {
+    id: long
+    isRunning: boolean
+}
+@enduml
