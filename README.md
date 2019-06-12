@@ -43,9 +43,20 @@ The challenge is where the players will face off against the bug in a series of 
 On the scoreboard, the player's will be able to see their final results of the challenge. If they are up to a new challenge, they can click the *Back* button and land again on the homescreen.
 
 ### The Objects
-By looking at the different screens of the mockup we can deduce our first batch of *"real world"* objects that we will need and what attributes might be necessary.
+By looking at the different screens of the mockup we can deduce our first batch of *"real world"* objects that we will need and what attributes might be necessary. After a lot of thinking and rewriting I currently only see two *real* objects that we need to keep an eye on.
+
+![The Entities and their Relations](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/daedal-knickerbockers/code_exercises/master/resources/diagrams/ERD.puml)
 
 #### The Game
-A `Game` object will represent one instance of the actual Beat the Bug game. A `Game` therefore needs to be identifiable by a unique id to be separable from other `Game` instances. Furthermore, a `Game`can either be running or finished.
+A `Game` object will represent one instance of the actual Beat the Bug game. A `Game` therefore needs to be identifiable by a unique id to be separable from other `Game` instances. Furthermore, a `Game`can have different `GameState`s to identify if we are currently waiting for all players in the lobby to get ready, if the challenge is running or if it has ended.
 
-![The Game Class](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/daedal-knickerbockers/code_exercises/master/resources/diagrams/Game.puml)
+We can skip creating specialized classes that hold information for the lobby or the scoreboard by simply using relevant `GameState`s for the different screens the `Game` can be on.
+
+Using a separate `Bug` class can also be omitted. The `Bug`'s only *real* information would (at least for now) be its health, which we can be easily incorporated into the `Game` as well. Being the quantitative measurement of success of the players, it also fits rather nicely into the class.
+
+As the players wil be facing different challenges that should get harder and harder, it makes sense to group them into different *levels*. As I want to keep these different challenges really simple for now, I will just add a level counter to the game that will represent the number of levels beaten by the players.
+
+#### The Player
+A `Player` will be a human participant in the game itself. One player can only ever be part of one `Game`, but one `Game` can hold multiple `Player`s. To distinguish the different participants, the users should be able to choose a *name* and a *color* for their `Player`. 
+
+To keep track of the `Player`'s ready-state in the lobby, each player will hold that information as a separate attribute. The same goes for the fact if the `Player` is still alive and well or already beaten by the bug. A player may also decide to leave the game, either early after defeat or at the end after looking at the scoreboard. To be able to distinguish present and absent `Player`s, they will also hold that information.

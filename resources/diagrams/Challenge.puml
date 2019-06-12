@@ -1,0 +1,6 @@
+@startuml
+Class Challenge {
+    id: long
+    
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+Class Lobby {
+    id: long
+    arePlayersReady: Map<Player, ReadyState>
+    isLocked: boolean
+}
+@enduml
