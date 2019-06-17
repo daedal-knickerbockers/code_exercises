@@ -54,4 +54,5 @@ buildNumber.properties
 
 ### Krita ###
 # Ignore local drawing files
-.kra
+*.kra
+*.kra~
