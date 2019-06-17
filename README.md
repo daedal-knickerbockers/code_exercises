@@ -60,3 +60,66 @@ As the players wil be facing different challenges that should get harder and har
 A `Player` will be a human participant in the game itself. One player can only ever be part of one `Game`, but one `Game` can hold multiple `Player`s. To distinguish the different participants, the users should be able to choose a *name* and a *color* for their `Player`. 
 
 To keep track of the `Player`'s ready-state in the lobby, each player will hold that information as a separate attribute. The same goes for the fact if the `Player` is still alive and well or already beaten by the bug. A player may also decide to leave the game, either early after defeat or at the end after looking at the scoreboard. To be able to distinguish present and absent `Player`s, they will also hold that information.
+
+### The Challenges
+So for the players to overcome the bug, there needs to be some real challenge to it. To keep those encounters quick and easy to code and be able to use a lot of variety, I will keep them very simple, too. For inspiration, let's look at some boss encounters in other games to get some inspiration of what you might expect in *Beat the Bug*.
+
+Every *Challenge* will be a set of fixed moves the bug can make, similar to a simple 2D boss fight. Here are some examples from the game [Hollow Knight](https://hollowknight.com/). As Hollow Knight is definitely a game worth playing for yourself, please look at these examples with caution - they might spoil some things for you. All short scenes shown here are taken from [RUSTY - The Superforge](https://www.youtube.com/channel/UCL-Tm21Rft-u6EI18n0EN2w)'s channel, from the video [Hey, Let's Rank all the Hollow Knight Bosses Again](https://www.youtube.com/watch?v=TASsX99Asew).
+
+<details>
+    <summary>What about rocks falling from above that the players need to evade?</summary>
+    <img src="./resources/gifs/hollow_knight_boss_01.gif" />
+</details>
+
+<details>
+    <summary>Or deadly lasers shooting from every direction?</summary>
+    <img src="./resources/gifs/hollow_knight_boss_02.gif" />
+</details>
+
+<details>
+    <summary>Or sharp spikes rupturing up from the ground?</summary>
+    <img src="./resources/gifs/hollow_knight_boss_04.gif" />
+</details>
+
+<details>
+    <summary>Or any combination of those?</summary>
+    <img src="./resources/gifs/hollow_knight_boss_05.gif" />
+</details>
+
+To enable different combinations of the moves the bug can make, every challenge will be written down as some *sheet music* that will be played back by the game to let the players hear the sweet sound of their own demise 😉 Just kidding, we will keep everything around here kid friendly. The game will have a basic set of *moves* implemented and the *challenge* will just trigger the moves in succession, leaving defined pauses between them. A simple challenge might look something like this:
+
+```json
+{
+    "_metadata": {
+        "name": "swing_swing_slam",
+        "health_from": 1.0,
+        "health_to": 0.5,
+        "max_speed": 1.25
+    },
+    "moves": [
+        {
+            "start_at": 0,
+            "duration": 0.25,
+            "move": "swing_to_right",
+        }, {
+            "start_at": 0.25,
+            "duration": 0.25,
+            "move": "swing_to_left"
+        }, {
+            "start_at": 0.75,
+            "duration": 0.25,
+            "move": "slam_middle"
+        }
+    ]
+}
+```
+
+This will translate to the following challenge in the game:
+
+![Swing, Swing, Pause, Slam](./resources/gifs/swing_swing_slam.gif)
+
+Besides showcasing how a *sheet* gets translated to a *challenge*, this is also the first glimpse at what the artistic quality of the game might be. It won't be impressive 🙈
+
+The time range of a move will go from 0.0 to 1.0. Every move will have a start time and a duration, making chaining and also parallel moves possible. Pauses are implemented by time frames that don't contain any moves.
+
+As far as the metadata goes, the *health_from* and *health_to* attributes will determine in which lifecycle the bug will chose this challenge. This way, we can implement harder challenges the lower the bug's health gets. Also, by adding a speed multiplier, we can speed things up on harder difficulty. The added speed will be interpolated from 1.0 to *max_speed* between *health_from* and *health_to*, meaning lower health equals faster moves.
