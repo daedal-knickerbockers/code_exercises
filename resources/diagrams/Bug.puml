@@ -1,6 +1,0 @@
-@startuml
-class Bug {
-    id: long
-    health: int
-}
-@enduml

@@ -1,8 +1,0 @@
-@startuml
-Class Game {
-    id: long
-    isRunning: boolean
-    lobby: long
-    challenge: long
-}
-@enduml

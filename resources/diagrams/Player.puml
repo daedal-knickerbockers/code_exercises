@@ -1,9 +1,0 @@
-@startuml
-class Player {
-    id: long
-    name: string
-    color: Color
-    score: int
-    isAlive: boolean
-}
-@enduml
